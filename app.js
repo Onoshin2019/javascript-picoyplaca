@@ -31,7 +31,8 @@ function consultCarOnTheRoad(e){
                     //CHECK PASS
                     //DATE
                     var dateEnd = dataCar.date.split("/");
-                    var objDate = new Date(dateEnd[2],dateEnd[0],dateEnd[1]);
+                    var objDate = new Date(parseInt(dateEnd[2]),parseInt(dateEnd[0])-1,parseInt(dateEnd[1]));
+
                     //DAY OF WEEK
                     var dayOfWeek = objDate.getDay();
                     //HOUR
@@ -39,30 +40,52 @@ function consultCarOnTheRoad(e){
                     objDate.setHours(hourEnd[0]);
                     objDate.setMinutes(hourEnd[1]);
                     //INTERVALS
-                    var interval1 = new Date(dateEnd[2],dateEnd[0],dateEnd[1]);
+                    var interval1 = new Date(parseInt(dateEnd[2]),parseInt(dateEnd[0])-1,parseInt(dateEnd[1]));
                     interval1.setHours(7);
-                    var interval2 = new Date(dateEnd[2],dateEnd[0],dateEnd[1]);
+                    interval1.setMinutes(0);
+                    var interval2 = new Date(parseInt(dateEnd[2]),parseInt(dateEnd[0])-1,parseInt(dateEnd[1]));
                     interval2.setHours(9);
                     interval2.setMinutes(30);
-                    var interval3 = new Date(dateEnd[2],dateEnd[0],dateEnd[1]);
+                    var interval3 = new Date(parseInt(dateEnd[2]),parseInt(dateEnd[0])-1,parseInt(dateEnd[1]));
                     interval3.setHours(16);
-                    var interval4 = new Date(dateEnd[2],dateEnd[0],dateEnd[1]);
+                    interval3.setMinutes(0);
+                    var interval4 = new Date(parseInt(dateEnd[2]),parseInt(dateEnd[0])-1,parseInt(dateEnd[1]));
                     interval4.setHours(19);
                     interval4.setMinutes(30);
-                    //COMPARISON                    
+                    //COMPARISON   
                     if ((objDate >= interval1 && objDate <= interval2) ||
                     (objDate >= interval3 && objDate <= interval4))
                     {
                         //MONDAY
-                        if (dayOfWeek == 1 && (digit == 1 || digit == 2)) writeMessage("That vehicle can not be on the road!!!");
-                        //TUESDAY
-                        if (dayOfWeek == 2 && (digit == 3 || digit == 4)) writeMessage("That vehicle can not be on the road!!!");
-                        //WEDNESDAY
-                        if (dayOfWeek == 3 && (digit == 5 || digit == 6)) writeMessage("That vehicle can not be on the road!!!");
-                        //THURSDAY
-                        if (dayOfWeek == 4 && (digit == 7 || digit == 8)) writeMessage("That vehicle can not be on the road!!!");
-                        //FRIDAY
-                        if (dayOfWeek == 5 && (digit == 9 || digit == 0)) writeMessage("That vehicle can not be on the road!!!");
+                        if (dayOfWeek == 1 && (digit == 1 || digit == 2)) 
+                            writeMessage("That vehicle can not be on the road!!!") 
+                            else
+                            {
+                                //TUESDAY
+                                if (dayOfWeek == 2 && (digit == 3 || digit == 4)) 
+                                    writeMessage("That vehicle can not be on the road!!!");
+                                else 
+                                {
+                                    //WEDNESDAY
+                                    if (dayOfWeek == 3 && (digit == 5 || digit == 6)) 
+                                        writeMessage("That vehicle can not be on the road!!!");
+                                    else
+                                    {
+                                        //THURSDAY
+                                        if (dayOfWeek == 4 && (digit == 7 || digit == 8)) 
+                                            writeMessage("That vehicle can not be on the road!!!");
+                                        else
+                                        {
+                                            //FRIDAY
+                                            if (dayOfWeek == 5 && (digit == 9 || digit == 0)) 
+                                                writeMessage("That vehicle can not be on the road!!!");
+                                            //OTHER DAY
+                                            else
+                                                writeMessage("That vehicle can be on the road!!!");
+                                        }
+                                    }
+                                }
+                            }
                     }
                     else
                     {
@@ -90,7 +113,7 @@ function writeMessage(m){
     //CLEAR
     message.innerHTML = '';
     //MESSAGE
-    message.innerHTML = `<div class="card">
+    message.innerHTML += `<div class="card">
             <div class="card-body">
                 <p>${title}</p>
             </div>
